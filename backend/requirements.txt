@@ -13,3 +13,6 @@ pytest
 google-genai
 python-dotenv
 requests
+sqlalchemy
+psycopg[binary]
+pgvector
