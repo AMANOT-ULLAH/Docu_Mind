@@ -17,12 +17,13 @@ def extract_image_pages(path, lang="eng+ben"):
     img = Image.open(path)   # verify()-এর পর আবার খুলতে হয়
     for i, frame in enumerate(ImageSequence.Iterator(img), start=1):  # TIFF-এর একাধিক frame
         try:
-            text, conf = ocr_image(frame.copy(), lang)
+            text, conf, low = ocr_image(frame.copy(), lang)
             if not text:
                 warnings.append(f"frame {i}: no text found")
-            elif conf < LOW_CONFIDENCE:
-                warnings.append(f"frame {i}: low OCR confidence ({conf})")
-            pages.append(PageResult(page_number=i, method="ocr", text=text, confidence=conf))
+            elif conf < LOW_CONFIDENCE or low > 15:
+                warnings.append(f"frame {i}: low OCR quality (avg {conf}, {low}% doubtful words)")
+            pages.append(PageResult(page_number=i, method="ocr", text=text,
+                                    confidence=conf, low_conf_words=low))
         except Exception as e:
             warnings.append(f"frame {i} failed: {e}")
     return pages, warnings

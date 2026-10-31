@@ -6,6 +6,7 @@ class PageResult(BaseModel):
     method: Literal["digital", "ocr", "table"]
     text: str
     confidence: Optional[float] = None
+    low_conf_words: Optional[float] = None   # সন্দেহজনক শব্দের শতাংশ
 
 class ExtractionResult(BaseModel):
     file_name: str
