@@ -1,5 +1,6 @@
 import time
 from app.validation.invoice_validator import validate_invoice
+from app.validation.duplicates import file_hash, invoice_key, find_duplicates
 from app.processors.router import process_document
 from app.extraction.llm_extractor import (extract_invoice, verify_evidence,
                                           AllProvidersFailed)
@@ -15,7 +16,7 @@ def build_text(doc) -> str:
     )
 
 
-def process_and_extract(path) -> dict:
+def process_and_extract(path, known=None) -> dict:
     start = time.perf_counter()
     doc = process_document(path)
 
@@ -24,6 +25,8 @@ def process_and_extract(path) -> dict:
         "file_seconds": round(time.perf_counter() - start, 2),
         "llm_seconds": None,
         "seconds": None,
+        "file_hash": None,
+        "invoice_key": None,
         "doc_status": doc.status,
         "extraction": None,
         "validation": None,
@@ -32,7 +35,10 @@ def process_and_extract(path) -> dict:
         "review_reasons": [],
         "errors": list(doc.errors),
     }
-
+    try:
+        out["file_hash"] = file_hash(path)
+    except OSError as e:
+        out["errors"].append(f"could not hash file: {e}")
     if doc.status == "failed":
         out["review_reasons"].append("document could not be processed")
         out["seconds"] = round(time.perf_counter() - start, 2)
@@ -65,6 +71,11 @@ def process_and_extract(path) -> dict:
         out["review_reasons"].append("evidence not found in source text")
     out["extraction"] = result.model_dump()
     out["validation"] = validate_invoice(out["extraction"])
+    out["invoice_key"] = invoice_key(out["extraction"])
+    dups = find_duplicates(out["file_hash"], out["invoice_key"], known or [])
+    if dups:
+        out["validation"]["issues"] += dups
+        out["validation"]["status"] = "review_required"
     out["review_reasons"] += [
         f"{i['type']}: {i['field']}" for i in out["validation"]["issues"]
     ]
