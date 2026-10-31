@@ -11,13 +11,21 @@ def preprocess(img: Image.Image) -> Image.Image:
     return img
 
 def ocr_image(img: Image.Image, lang: str = "eng+ben"):
-    """text আর গড় confidence (0-100) ফেরত দেয়।"""
+    """একবার OCR চালিয়ে text আর গড় confidence (0-100) ফেরত দেয়।"""
     processed = preprocess(img)
-    text = pytesseract.image_to_string(processed, lang=lang).strip()
     data = pytesseract.image_to_data(
         processed, lang=lang, output_type=pytesseract.Output.DICT
     )
-    confs = [float(c) for w, c in zip(data["text"], data["conf"])
-             if w.strip() and float(c) >= 0]
+    lines, confs = {}, []
+    for i, word in enumerate(data["text"]):
+        if not word.strip():
+            continue
+        # একই (block, paragraph, line)-এর শব্দগুলো এক লাইনে জোড়া লাগে
+        key = (data["block_num"][i], data["par_num"][i], data["line_num"][i])
+        lines.setdefault(key, []).append(word)
+        c = float(data["conf"][i])
+        if c >= 0:
+            confs.append(c)
+    text = "\n".join(" ".join(words) for words in lines.values())
     confidence = round(sum(confs) / len(confs), 1) if confs else 0.0
     return text, confidence
