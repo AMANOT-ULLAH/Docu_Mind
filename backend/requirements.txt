@@ -1,0 +1,12 @@
+pymupdf
+pdfplumber
+pandas
+openpyxl
+xlrd
+pillow
+pytesseract
+pydantic
+fastapi
+uvicorn
+python-multipart
+pytest
