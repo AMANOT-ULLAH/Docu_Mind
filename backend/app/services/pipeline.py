@@ -31,6 +31,7 @@ def process_and_extract(path, known=None) -> dict:
         "extraction": None,
         "validation": None,
         "provider": None,
+        "text": None,
         "evidence_flags": [],
         "review_reasons": [],
         "errors": list(doc.errors),
@@ -54,7 +55,9 @@ def process_and_extract(path, known=None) -> dict:
             out["review_reasons"].append(
                 f"page {p.page_number}: {p.low_conf_words}% of words have low OCR confidence")
 
+    
     text = build_text(doc)
+    out["text"] = text
     t_llm = time.perf_counter()
     try:
         result, meta = extract_invoice(text)
