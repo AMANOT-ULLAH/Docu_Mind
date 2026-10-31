@@ -7,6 +7,7 @@ from app.extraction.llm_extractor import (extract_invoice, verify_evidence,
 LOW_OCR_CONFIDENCE = 60
 LOW_WORD_RATIO = 15   # শতাংশ
 
+
 def build_text(doc) -> str:
     """সব page-এর text একসাথে জোড়ে, প্রতিটার আগে page চিহ্ন দিয়ে।"""
     return "\n\n".join(
@@ -17,10 +18,15 @@ def build_text(doc) -> str:
 def process_and_extract(path) -> dict:
     start = time.perf_counter()
     doc = process_document(path)
+
     out = {
         "file": doc.file_name,
+        "file_seconds": round(time.perf_counter() - start, 2),
+        "llm_seconds": None,
+        "seconds": None,
         "doc_status": doc.status,
         "extraction": None,
+        "validation": None,
         "provider": None,
         "evidence_flags": [],
         "review_reasons": [],
@@ -32,18 +38,21 @@ def process_and_extract(path) -> dict:
         out["seconds"] = round(time.perf_counter() - start, 2)
         return out
 
-        for p in doc.pages:
-            if p.method != "ocr":
-                continue
-            if p.confidence is not None and p.confidence < LOW_OCR_CONFIDENCE:
-                out["review_reasons"].append(f"page {p.page_number}: low OCR confidence ({p.confidence})")
-            if p.low_conf_words is not None and p.low_conf_words > LOW_WORD_RATIO:
-                out["review_reasons"].append(
-                    f"page {p.page_number}: {p.low_conf_words}% of words have low OCR confidence")
+    for p in doc.pages:
+        if p.method != "ocr":
+            continue
+        if p.confidence is not None and p.confidence < LOW_OCR_CONFIDENCE:
+            out["review_reasons"].append(
+                f"page {p.page_number}: low OCR confidence ({p.confidence})")
+        if p.low_conf_words is not None and p.low_conf_words > LOW_WORD_RATIO:
+            out["review_reasons"].append(
+                f"page {p.page_number}: {p.low_conf_words}% of words have low OCR confidence")
 
     text = build_text(doc)
+    t_llm = time.perf_counter()
     try:
         result, meta = extract_invoice(text)
+        out["llm_seconds"] = round(time.perf_counter() - t_llm, 2)
     except AllProvidersFailed as e:
         out["review_reasons"].append("all LLM providers failed")
         out["errors"].append(str(e)[:300])

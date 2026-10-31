@@ -60,7 +60,7 @@ def validate_invoice(ex: dict) -> dict:
         ev = ex[name]["evidence"]
         if ex[name]["value"] is not None and ev and AMBIGUOUS_DECIMAL_RE.search(ev):
             add("ambiguous_number", name,
-                "dot followed by exactly 3 digits (7.050 could mean 7.05 or 7,050); verify manually",
+                                "dot followed by exactly 3 digits (e.g. 7.050 could mean 7.05 or 7,050); verify manually",
                 actual=ex[name]["value"], severity="warning")
 
     amounts, items = [], ex["line_items"]
