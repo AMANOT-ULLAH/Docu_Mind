@@ -9,7 +9,7 @@ class PageResult(BaseModel):
 
 class ExtractionResult(BaseModel):
     file_name: str
-    file_type: Literal["pdf", "image", "excel", "csv"]
+    file_type: Literal["pdf", "image", "excel", "csv", "unknown"]
     file_hash: str
     status: Literal["success", "partial", "failed"]
     pages: list[PageResult] = Field(default_factory=list)
