@@ -1,0 +1,1554 @@
+{
+  "run_at": "2026-11-01T23:53:11",
+  "summary": {
+    "files": 34,
+    "valid_documents": 32,
+    "extracted": 32,
+    "extraction_success_rate_%": 100.0,
+    "failure_rate_%": 0.0,
+    "crashes": 0,
+    "bad_files_handled_correctly": "2/2",
+    "all_outcomes_as_expected_%": 100.0,
+    "field_accuracy_%": 90.2,
+    "field_accuracy_note": "extraction ব্যর্থ হলে ওই ফাইলের সব ফিল্ড ভুল ধরা হয়েছে",
+    "per_field_%": {
+      "invoice_number": 90.6,
+      "invoice_date": 90.6,
+      "supplier_name": 90.6,
+      "customer_name": 90.6,
+      "subtotal": 90.6,
+      "tax": 87.5,
+      "total": 90.6,
+      "currency": 90.6
+    },
+    "fully_correct_documents": "27/32",
+    "line_item_accuracy_%": 89.0,
+    "line_items_matched": "81/91",
+    "extra_line_items_invented": 0,
+    "invented_values": {},
+    "accuracy_by_kind_%": {
+      "digital_pdf": 100.0,
+      "dup_file": 100.0,
+      "dup_invoice": 100.0,
+      "scanned_pdf": 100.0,
+      "image_clean": 100.0,
+      "image_noisy_1": 93.8,
+      "image_noisy_2": 100.0,
+      "image_noisy_3": 0.0,
+      "xlsx": 100.0,
+      "csv": 100.0,
+      "digital_usd": 100.0,
+      "digital_notax": 100.0,
+      "digital_wrong_total": 100.0,
+      "digital_line_mismatch": 100.0
+    },
+    "validator_detected": {
+      "dup_copy_of_digital_01.pdf": [
+        "duplicate_file"
+      ],
+      "dup_image_of_digital_01.png": [
+        "duplicate_invoice",
+        "duplicate_invoice"
+      ],
+      "wrong_total_01.pdf": [
+        "total_mismatch"
+      ],
+      "line_mismatch_01.pdf": [
+        "line_item_mismatch",
+        "model_note"
+      ]
+    },
+    "documents_with_wrong_values": 5,
+    "wrong_and_flagged_for_review": 5,
+    "silent_errors_wrong_but_not_flagged": {},
+    "silent_error_count": 0,
+    "false_alarms_on_correct_docs": "0/23 (0.0%)",
+    "false_alarm_files": {},
+    "seconds": {
+      "mean": 11.4,
+      "median": 7.63,
+      "p95": 28.59,
+      "max": 92.5,
+      "total": 387.5
+    },
+    "mean_llm_seconds": 10.3,
+    "mean_file_seconds": 1.4
+  },
+  "records": [
+    {
+      "file": "digital_01.pdf",
+      "kind": "digital_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 16.18,
+      "file_seconds": 0.02,
+      "llm_seconds": 16.16,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3000",
+        "invoice_date": "2026-10-01",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Rahman Traders",
+        "subtotal": 41400.0,
+        "tax": 6210.0,
+        "total": 47610.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "digital_02.pdf",
+      "kind": "digital_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 3.33,
+      "file_seconds": 0.01,
+      "llm_seconds": 3.32,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3001",
+        "invoice_date": "2026-10-02",
+        "supplier_name": "Padma Electronics Ltd",
+        "customer_name": "Alpha Clinic",
+        "subtotal": 13800.0,
+        "tax": 1380.0,
+        "total": 15180.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "digital_03.pdf",
+      "kind": "digital_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 12.97,
+      "file_seconds": 0.01,
+      "llm_seconds": 12.96,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3002",
+        "invoice_date": "2026-10-03",
+        "supplier_name": "Meghna Stationery House",
+        "customer_name": "Karim Enterprises",
+        "subtotal": 110100.0,
+        "tax": 16515.0,
+        "total": 126615.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        4,
+        4,
+        4
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "digital_04.pdf",
+      "kind": "digital_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 28.59,
+      "file_seconds": 0.01,
+      "llm_seconds": 28.58,
+      "provider": "gemini/gemini-3.1-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3003",
+        "invoice_date": "2026-10-04",
+        "supplier_name": "Jamuna Hardware Traders",
+        "customer_name": "Green Valley School",
+        "subtotal": 122100.0,
+        "tax": 12210.0,
+        "total": 134310.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "digital_05.pdf",
+      "kind": "digital_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 3.12,
+      "file_seconds": 0.01,
+      "llm_seconds": 3.11,
+      "provider": "gemini/gemini-3.1-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3004",
+        "invoice_date": "2026-10-05",
+        "supplier_name": "Surma Tech Solutions",
+        "customer_name": "City Pharmacy",
+        "subtotal": 117300.0,
+        "tax": 5865.0,
+        "total": 123165.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "digital_06.pdf",
+      "kind": "digital_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 10.85,
+      "file_seconds": 0.01,
+      "llm_seconds": 10.84,
+      "provider": "gemini/gemini-3.1-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3005",
+        "invoice_date": "2026-10-06",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Nova Trading Co",
+        "subtotal": 21300.0,
+        "tax": 3195.0,
+        "total": 24495.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "dup_copy_of_digital_01.pdf",
+      "kind": "dup_file",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 4.87,
+      "file_seconds": 0.01,
+      "llm_seconds": 4.86,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "duplicate_file: file"
+      ],
+      "errors": [],
+      "issues": [
+        "duplicate_file"
+      ],
+      "pred": {
+        "invoice_number": "INV-2026-3000",
+        "invoice_date": "2026-10-01",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Rahman Traders",
+        "subtotal": 41400.0,
+        "tax": 6210.0,
+        "total": 47610.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "dup_image_of_digital_01.png",
+      "kind": "dup_invoice",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 12.37,
+      "file_seconds": 1.43,
+      "llm_seconds": 10.94,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "duplicate_invoice: invoice_number",
+        "duplicate_invoice: invoice_number"
+      ],
+      "errors": [],
+      "issues": [
+        "duplicate_invoice",
+        "duplicate_invoice"
+      ],
+      "pred": {
+        "invoice_number": "INV-2026-3000",
+        "invoice_date": "2026-10-01",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Rahman Traders",
+        "subtotal": 41400.0,
+        "tax": 6210.0,
+        "total": 47610.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "scanned_01.pdf",
+      "kind": "scanned_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 9.96,
+      "file_seconds": 3.74,
+      "llm_seconds": 6.22,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "model_note"
+      ],
+      "pred": {
+        "invoice_number": "INV-2026-3006",
+        "invoice_date": "2026-10-07",
+        "supplier_name": "Padma Electronics Ltd",
+        "customer_name": "Sunrise Bakery",
+        "subtotal": 63500.0,
+        "tax": 9525.0,
+        "total": 73025.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "scanned_02.pdf",
+      "kind": "scanned_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 8.47,
+      "file_seconds": 3.57,
+      "llm_seconds": 4.9,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3007",
+        "invoice_date": "2026-10-08",
+        "supplier_name": "Meghna Stationery House",
+        "customer_name": "Rahman Traders",
+        "subtotal": 13800.0,
+        "tax": 2070.0,
+        "total": 15870.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "scanned_03.pdf",
+      "kind": "scanned_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 13.96,
+      "file_seconds": 4.11,
+      "llm_seconds": 9.85,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3008",
+        "invoice_date": "2026-10-09",
+        "supplier_name": "Jamuna Hardware Traders",
+        "customer_name": "Alpha Clinic",
+        "subtotal": 25900.0,
+        "tax": 3885.0,
+        "total": 29785.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        4,
+        4,
+        4
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "scanned_04.pdf",
+      "kind": "scanned_pdf",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 8.19,
+      "file_seconds": 3.63,
+      "llm_seconds": 4.55,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3009",
+        "invoice_date": "2026-10-10",
+        "supplier_name": "Surma Tech Solutions",
+        "customer_name": "Karim Enterprises",
+        "subtotal": 26500.0,
+        "tax": 2650.0,
+        "total": 29150.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_clean_01.png",
+      "kind": "image_clean",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 10.53,
+      "file_seconds": 1.58,
+      "llm_seconds": 8.95,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3010",
+        "invoice_date": "2026-10-11",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Green Valley School",
+        "subtotal": 38400.0,
+        "tax": 3840.0,
+        "total": 42240.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        4,
+        4,
+        4
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_clean_02.png",
+      "kind": "image_clean",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 19.24,
+      "file_seconds": 1.25,
+      "llm_seconds": 17.99,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3011",
+        "invoice_date": "2026-10-12",
+        "supplier_name": "Padma Electronics Ltd",
+        "customer_name": "City Pharmacy",
+        "subtotal": 63400.0,
+        "tax": 9510.0,
+        "total": 72910.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_clean_03.png",
+      "kind": "image_clean",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 37.6,
+      "file_seconds": 1.34,
+      "llm_seconds": 36.26,
+      "provider": "gemini/gemini-3.1-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3012",
+        "invoice_date": "2026-10-13",
+        "supplier_name": "Meghna Stationery House",
+        "customer_name": "Nova Trading Co",
+        "subtotal": 28200.0,
+        "tax": 2820.0,
+        "total": 31020.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_clean_04.png",
+      "kind": "image_clean",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 92.5,
+      "file_seconds": 1.22,
+      "llm_seconds": 91.29,
+      "provider": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3013",
+        "invoice_date": "2026-10-14",
+        "supplier_name": "Jamuna Hardware Traders",
+        "customer_name": "Sunrise Bakery",
+        "subtotal": 10200.0,
+        "tax": 510.0,
+        "total": 10710.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_1_01.jpg",
+      "kind": "image_noisy_1",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 11.51,
+      "file_seconds": 3.19,
+      "llm_seconds": 8.32,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "total_mismatch: total",
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "total_mismatch",
+        "model_note"
+      ],
+      "pred": {
+        "invoice_number": "INV-2026-3014",
+        "invoice_date": "2026-10-15",
+        "supplier_name": "Surma Tech Solutions",
+        "customer_name": "Rahman Traders",
+        "subtotal": 151700.0,
+        "tax": null,
+        "total": 174455.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": false,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        4,
+        4,
+        4
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_1_02.jpg",
+      "kind": "image_noisy_1",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 10.14,
+      "file_seconds": 3.06,
+      "llm_seconds": 7.08,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3015",
+        "invoice_date": "2026-10-16",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Alpha Clinic",
+        "subtotal": 13200.0,
+        "tax": 1320.0,
+        "total": 14520.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_2_01.jpg",
+      "kind": "image_noisy_2",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 5.91,
+      "file_seconds": 3.38,
+      "llm_seconds": 2.53,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3016",
+        "invoice_date": "2026-10-17",
+        "supplier_name": "Padma Electronics Ltd",
+        "customer_name": "Karim Enterprises",
+        "subtotal": 15300.0,
+        "tax": 1530.0,
+        "total": 16830.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_2_02.jpg",
+      "kind": "image_noisy_2",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 5.57,
+      "file_seconds": 3.06,
+      "llm_seconds": 2.51,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3017",
+        "invoice_date": "2026-10-18",
+        "supplier_name": "Meghna Stationery House",
+        "customer_name": "Green Valley School",
+        "subtotal": 80200.0,
+        "tax": 8020.0,
+        "total": 88220.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_3_01.jpg",
+      "kind": "image_noisy_3",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 10.37,
+      "file_seconds": 4.83,
+      "llm_seconds": 5.54,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "page 1: low OCR confidence (43.0)",
+        "page 1: 81.0% of words have low OCR confidence",
+        "missing_field: invoice_number",
+        "missing_field: invoice_date",
+        "missing_field: total",
+        "low_confidence: supplier_name",
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "missing_field",
+        "missing_field",
+        "missing_field",
+        "low_confidence",
+        "model_note"
+      ],
+      "pred": {
+        "invoice_number": null,
+        "invoice_date": null,
+        "supplier_name": "ne Stationery House",
+        "customer_name": null,
+        "subtotal": null,
+        "tax": null,
+        "total": null,
+        "currency": null
+      },
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": false,
+        "supplier_name": false,
+        "customer_name": false,
+        "subtotal": false,
+        "tax": false,
+        "total": false,
+        "currency": false
+      },
+      "invented": [],
+      "items": [
+        0,
+        2,
+        0
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_3_02.jpg",
+      "kind": "image_noisy_3",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 9.19,
+      "file_seconds": 3.67,
+      "llm_seconds": 5.52,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "page 1: low OCR confidence (43.8)",
+        "page 1: 72.2% of words have low OCR confidence",
+        "missing_field: invoice_number",
+        "missing_field: invoice_date",
+        "missing_field: supplier_name",
+        "missing_field: total",
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "missing_field",
+        "missing_field",
+        "missing_field",
+        "missing_field",
+        "model_note"
+      ],
+      "pred": {
+        "invoice_number": null,
+        "invoice_date": null,
+        "supplier_name": null,
+        "customer_name": null,
+        "subtotal": null,
+        "tax": null,
+        "total": null,
+        "currency": null
+      },
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": false,
+        "supplier_name": false,
+        "customer_name": false,
+        "subtotal": false,
+        "tax": false,
+        "total": false,
+        "currency": false
+      },
+      "invented": [],
+      "items": [
+        0,
+        3,
+        0
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "image_noisy_3_03.jpg",
+      "kind": "image_noisy_3",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 6.12,
+      "file_seconds": 3.35,
+      "llm_seconds": 2.77,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "page 1: low OCR confidence (45.2)",
+        "page 1: 66.7% of words have low OCR confidence",
+        "missing_field: invoice_number",
+        "missing_field: invoice_date",
+        "missing_field: supplier_name",
+        "unknown_currency: currency",
+        "ambiguous_number: total",
+        "low_confidence: total",
+        "low_confidence: currency",
+        "model_note: notes",
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "missing_field",
+        "missing_field",
+        "missing_field",
+        "unknown_currency",
+        "ambiguous_number",
+        "low_confidence",
+        "low_confidence",
+        "model_note",
+        "model_note"
+      ],
+      "pred": {
+        "invoice_number": null,
+        "invoice_date": null,
+        "supplier_name": null,
+        "customer_name": null,
+        "subtotal": null,
+        "tax": null,
+        "total": 42.37,
+        "currency": "BOY"
+      },
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": false,
+        "supplier_name": false,
+        "customer_name": false,
+        "subtotal": false,
+        "tax": false,
+        "total": false,
+        "currency": false
+      },
+      "invented": [],
+      "items": [
+        0,
+        4,
+        0
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "sheet_single_01.xlsx",
+      "kind": "xlsx",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 7.07,
+      "file_seconds": 0.19,
+      "llm_seconds": 6.87,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3018",
+        "invoice_date": "2026-10-19",
+        "supplier_name": "Jamuna Hardware Traders",
+        "customer_name": "City Pharmacy",
+        "subtotal": 36200.0,
+        "tax": 5430.0,
+        "total": 41630.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "sheet_multi_02.xlsx",
+      "kind": "xlsx",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 3.99,
+      "file_seconds": 0.02,
+      "llm_seconds": 3.97,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3019",
+        "invoice_date": "2026-10-20",
+        "supplier_name": "Surma Tech Solutions",
+        "customer_name": "Nova Trading Co",
+        "subtotal": 49800.0,
+        "tax": 4980.0,
+        "total": 54780.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "table_01.csv",
+      "kind": "csv",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 6.25,
+      "file_seconds": 0.0,
+      "llm_seconds": 6.24,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3020",
+        "invoice_date": "2026-10-21",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "Sunrise Bakery",
+        "subtotal": 50000.0,
+        "tax": 5000.0,
+        "total": 55000.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "table_02.csv",
+      "kind": "csv",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 3.23,
+      "file_seconds": 0.0,
+      "llm_seconds": 3.23,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3021",
+        "invoice_date": "2026-10-22",
+        "supplier_name": "Padma Electronics Ltd",
+        "customer_name": "Rahman Traders",
+        "subtotal": 117000.0,
+        "tax": 11700.0,
+        "total": 128700.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        4,
+        4,
+        4
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "usd_01.pdf",
+      "kind": "digital_usd",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 2.44,
+      "file_seconds": 0.01,
+      "llm_seconds": 2.43,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3022",
+        "invoice_date": "2026-10-23",
+        "supplier_name": "Meghna Stationery House",
+        "customer_name": "Alpha Clinic",
+        "subtotal": 719.8,
+        "tax": 107.97,
+        "total": 827.77,
+        "currency": "USD"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "usd_02.pdf",
+      "kind": "digital_usd",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 2.66,
+      "file_seconds": 0.01,
+      "llm_seconds": 2.65,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3023",
+        "invoice_date": "2026-10-24",
+        "supplier_name": "Jamuna Hardware Traders",
+        "customer_name": "Karim Enterprises",
+        "subtotal": 536.7,
+        "tax": 80.51,
+        "total": 617.21,
+        "currency": "USD"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        3,
+        3,
+        3
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "notax_01.pdf",
+      "kind": "digital_notax",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 2.31,
+      "file_seconds": 0.01,
+      "llm_seconds": 2.3,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": false,
+      "review_reasons": [],
+      "errors": [],
+      "issues": [],
+      "pred": {
+        "invoice_number": "INV-2026-3024",
+        "invoice_date": "2026-10-25",
+        "supplier_name": "Surma Tech Solutions",
+        "customer_name": "Green Valley School",
+        "subtotal": 21900.0,
+        "tax": null,
+        "total": 21900.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "wrong_total_01.pdf",
+      "kind": "digital_wrong_total",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 2.68,
+      "file_seconds": 0.01,
+      "llm_seconds": 2.67,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "total_mismatch: total"
+      ],
+      "errors": [],
+      "issues": [
+        "total_mismatch"
+      ],
+      "pred": {
+        "invoice_number": "INV-2026-3025",
+        "invoice_date": "2026-10-26",
+        "supplier_name": "Dhaka Office Supplies Ltd",
+        "customer_name": "City Pharmacy",
+        "subtotal": 38600.0,
+        "tax": 1930.0,
+        "total": 42530.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "line_mismatch_01.pdf",
+      "kind": "digital_line_mismatch",
+      "expect": "done",
+      "crashed": false,
+      "produced": true,
+      "seconds": 2.6,
+      "file_seconds": 0.01,
+      "llm_seconds": 2.59,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "line_item_mismatch: line_items[1]",
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "line_item_mismatch",
+        "model_note"
+      ],
+      "pred": {
+        "invoice_number": "INV-2026-3026",
+        "invoice_date": "2026-10-27",
+        "supplier_name": "Padma Electronics Ltd",
+        "customer_name": "Nova Trading Co",
+        "subtotal": 24200.0,
+        "tax": 1210.0,
+        "total": 25410.0,
+        "currency": "BDT"
+      },
+      "fields": {
+        "invoice_number": true,
+        "invoice_date": true,
+        "supplier_name": true,
+        "customer_name": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "currency": true
+      },
+      "invented": [],
+      "items": [
+        2,
+        2,
+        2
+      ],
+      "outcome_ok": true
+    },
+    {
+      "file": "corrupt_01.pdf",
+      "kind": "corrupt",
+      "expect": "failed",
+      "crashed": false,
+      "produced": false,
+      "seconds": 0.0,
+      "file_seconds": 0.0,
+      "llm_seconds": null,
+      "provider": null,
+      "flagged": true,
+      "review_reasons": [
+        "document could not be processed"
+      ],
+      "errors": [
+        "FileDataError: Failed to open file '/home/au-aman/docuMind/evaluation/dataset/corrupt_01.pdf' as type pdf."
+      ],
+      "issues": [],
+      "outcome_ok": true
+    },
+    {
+      "file": "blank_01.png",
+      "kind": "blank",
+      "expect": "failed_or_review",
+      "crashed": false,
+      "produced": true,
+      "seconds": 2.73,
+      "file_seconds": 0.91,
+      "llm_seconds": 1.82,
+      "provider": "gemini/gemini-3.5-flash-lite",
+      "flagged": true,
+      "review_reasons": [
+        "page 1: low OCR confidence (0.0)",
+        "page 1: 100.0% of words have low OCR confidence",
+        "missing_field: invoice_number",
+        "missing_field: invoice_date",
+        "missing_field: supplier_name",
+        "missing_field: total",
+        "model_note: notes"
+      ],
+      "errors": [],
+      "issues": [
+        "missing_field",
+        "missing_field",
+        "missing_field",
+        "missing_field",
+        "model_note"
+      ],
+      "invented": [],
+      "outcome_ok": true
+    }
+  ]
+}

@@ -139,10 +139,23 @@ def summarize(recs):
     exp = [r for r in recs if r["file"] and r.get("produced") is not None and
            r["kind"] in {"dup_file", "dup_invoice", "digital_wrong_total", "digital_line_mismatch"}]
     S["validator_detected"] = {r["file"]: r["issues"] for r in exp}
-    clean = [r for r in recs if r["expect"] == "done" and r["produced"] and r["kind"] not in
-             {"dup_file", "dup_invoice", "digital_wrong_total", "digital_line_mismatch"}]
+    planted = {"dup_file", "dup_invoice", "digital_wrong_total", "digital_line_mismatch"}
+
+    def right(r):
+        return "fields" in r and all(r["fields"].values()) and r["items"][0] == r["items"][1]
+
+    wrong_docs = [r for r in scored if r["produced"] and not right(r)]
+    caught = [r for r in wrong_docs if r["flagged"]]
+    silent = [r for r in wrong_docs if not r["flagged"]]
+    S["documents_with_wrong_values"] = len(wrong_docs)
+    S["wrong_and_flagged_for_review"] = len(caught)
+    S["silent_errors_wrong_but_not_flagged"] = {
+        r["file"]: [f for f, v in r["fields"].items() if not v] or ["line_items"] for r in silent}
+    S["silent_error_count"] = len(silent)
+
+    clean = [r for r in scored if r["produced"] and r["kind"] not in planted and right(r)]
     fp = [r for r in clean if r["flagged"]]
-    S["false_alarms"] = f"{len(fp)}/{len(clean)} ({pct(len(fp), len(clean))}%)"
+    S["false_alarms_on_correct_docs"] = f"{len(fp)}/{len(clean)} ({pct(len(fp), len(clean))}%)"
     S["false_alarm_files"] = {r["file"]: r["review_reasons"] for r in fp}
 
     secs = sorted(r["seconds"] for r in recs if r.get("seconds") is not None)
@@ -173,7 +186,7 @@ def main():
         recs.append(rec)
         wrong = [f for f, v in rec.get("fields", {}).items() if not v]
         print(f"[{n:>2}/{len(entries)}] {e['file']:30} {'OK ' if rec['outcome_ok' if 'outcome_ok' in rec else 'produced'] else 'BAD'}"
-              f" {rec.get('seconds')}s  wrong={wrong or '-'}  issues={rec['issues'] or '-'}"
+              f" {rec.get('seconds')}s [{(rec.get('provider') or '-').split('/')[-1]}] wrong={wrong or '-'}  issues={rec['issues'] or '-'}"
               + (f"  CRASH {rec['error']}" if rec['crashed'] else ""), flush=True)
         if rec.get("llm_seconds") is not None and n < len(entries):
             time.sleep(args.sleep)

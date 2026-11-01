@@ -744,6 +744,117 @@
     }
   },
   {
+    "file": "image_noisy_3_01.jpg",
+    "kind": "image_noisy_3",
+    "expect": "done",
+    "expect_issues": [],
+    "note": "",
+    "truth": {
+      "invoice_number": "INV-2026-3027",
+      "invoice_date": "2026-10-28",
+      "supplier_name": "Meghna Stationery House",
+      "customer_name": "Sunrise Bakery",
+      "subtotal": 160000,
+      "tax": 8000.0,
+      "total": 168000.0,
+      "currency": "BDT",
+      "line_items": [
+        {
+          "description": "Standing desk",
+          "quantity": 9,
+          "unit_price": 12000,
+          "amount": 108000
+        },
+        {
+          "description": "Office chair",
+          "quantity": 8,
+          "unit_price": 6500,
+          "amount": 52000
+        }
+      ]
+    }
+  },
+  {
+    "file": "image_noisy_3_02.jpg",
+    "kind": "image_noisy_3",
+    "expect": "done",
+    "expect_issues": [],
+    "note": "",
+    "truth": {
+      "invoice_number": "INV-2026-3028",
+      "invoice_date": "2026-10-01",
+      "supplier_name": "Jamuna Hardware Traders",
+      "customer_name": "Rahman Traders",
+      "subtotal": 21600,
+      "tax": 2160.0,
+      "total": 23760.0,
+      "currency": "BDT",
+      "line_items": [
+        {
+          "description": "Desk lamp",
+          "quantity": 5,
+          "unit_price": 1200,
+          "amount": 6000
+        },
+        {
+          "description": "Wireless keyboard",
+          "quantity": 4,
+          "unit_price": 2100,
+          "amount": 8400
+        },
+        {
+          "description": "Printer paper box",
+          "quantity": 8,
+          "unit_price": 900,
+          "amount": 7200
+        }
+      ]
+    }
+  },
+  {
+    "file": "image_noisy_3_03.jpg",
+    "kind": "image_noisy_3",
+    "expect": "done",
+    "expect_issues": [],
+    "note": "",
+    "truth": {
+      "invoice_number": "INV-2026-3029",
+      "invoice_date": "2026-10-02",
+      "supplier_name": "Surma Tech Solutions",
+      "customer_name": "Alpha Clinic",
+      "subtotal": 38700,
+      "tax": 3870.0,
+      "total": 42570.0,
+      "currency": "BDT",
+      "line_items": [
+        {
+          "description": "USB-C cable",
+          "quantity": 3,
+          "unit_price": 300,
+          "amount": 900
+        },
+        {
+          "description": "Printer paper box",
+          "quantity": 9,
+          "unit_price": 900,
+          "amount": 8100
+        },
+        {
+          "description": "Wireless keyboard",
+          "quantity": 9,
+          "unit_price": 2100,
+          "amount": 18900
+        },
+        {
+          "description": "Desk lamp",
+          "quantity": 9,
+          "unit_price": 1200,
+          "amount": 10800
+        }
+      ]
+    }
+  },
+  {
     "file": "sheet_single_01.xlsx",
     "kind": "xlsx",
     "expect": "done",

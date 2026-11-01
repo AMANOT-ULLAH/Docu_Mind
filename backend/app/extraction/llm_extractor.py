@@ -6,7 +6,7 @@ import requests
 from google import genai
 from google.genai import types
 
-from app.config import (GEMINI_API_KEY, GEMINI_MODELS,
+from app.config import (GEMINI_API_KEY, GEMINI_MODELS, LLM_TIMEOUT_SECONDS,
                         OPENROUTER_API_KEY, OPENROUTER_MODELS)
 from .prompts import SYSTEM_PROMPT
 from .schemas import InvoiceExtraction
@@ -22,7 +22,9 @@ class AllProvidersFailed(Exception):
 
 
 def _call_gemini(model: str, text: str):
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    client = genai.Client(
+        api_key=GEMINI_API_KEY,
+        http_options=types.HttpOptions(timeout=int(LLM_TIMEOUT_SECONDS * 1000)))
     resp = client.models.generate_content(
         model=model,
         contents=f"DOCUMENT TEXT:\n{text}",
@@ -52,7 +54,7 @@ def _call_openrouter(model: str, text: str):
                 {"role": "user", "content": f"DOCUMENT TEXT:\n{text}"},
             ],
         },
-        timeout=90,
+        timeout=(10, LLM_TIMEOUT_SECONDS),
     )
     r.raise_for_status()
     body = r.json()

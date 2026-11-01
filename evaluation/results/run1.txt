@@ -1,0 +1,12 @@
+nohup: ignoring input
+[ 1/34] digital_01.pdf                 OK  49.68s  wrong=-  issues=-
+[ 2/34] digital_02.pdf                 OK  41.84s  wrong=-  issues=-
+[ 3/34] digital_03.pdf                 OK  25.01s  wrong=-  issues=-
+[ 4/34] digital_04.pdf                 OK  33.61s  wrong=-  issues=-
+[ 5/34] digital_05.pdf                 OK  35.27s  wrong=-  issues=-
+[ 6/34] digital_06.pdf                 OK  46.46s  wrong=-  issues=-
+[ 7/34] dup_copy_of_digital_01.pdf     OK  36.19s  wrong=-  issues=['duplicate_file']
+[ 8/34] dup_image_of_digital_01.png    OK  42.6s  wrong=-  issues=['duplicate_invoice', 'duplicate_invoice']
+[ 9/34] scanned_01.pdf                 OK  42.72s  wrong=-  issues=['model_note']
+[10/34] scanned_02.pdf                 OK  47.04s  wrong=-  issues=-
+[11/34] scanned_03.pdf                 OK  43.88s  wrong=['invoice_date']  issues=['missing_field', 'model_note', 'model_note']

@@ -1,0 +1,112 @@
+[ 1/34] digital_01.pdf                 OK  16.18s [gemini-3.5-flash-lite] wrong=-  issues=-
+[ 2/34] digital_02.pdf                 OK  3.33s [gemini-3.5-flash-lite] wrong=-  issues=-
+[ 3/34] digital_03.pdf                 OK  12.97s [gemini-3.5-flash-lite] wrong=-  issues=-
+[ 4/34] digital_04.pdf                 OK  28.59s [gemini-3.1-flash-lite] wrong=-  issues=-
+[ 5/34] digital_05.pdf                 OK  3.12s [gemini-3.1-flash-lite] wrong=-  issues=-
+[ 6/34] digital_06.pdf                 OK  10.85s [gemini-3.1-flash-lite] wrong=-  issues=-
+[ 7/34] dup_copy_of_digital_01.pdf     OK  4.87s [gemini-3.5-flash-lite] wrong=-  issues=['duplicate_file']
+[ 8/34] dup_image_of_digital_01.png    OK  12.37s [gemini-3.5-flash-lite] wrong=-  issues=['duplicate_invoice', 'duplicate_invoice']
+[ 9/34] scanned_01.pdf                 OK  9.96s [gemini-3.5-flash-lite] wrong=-  issues=['model_note']
+[10/34] scanned_02.pdf                 OK  8.47s [gemini-3.5-flash-lite] wrong=-  issues=-
+[11/34] scanned_03.pdf                 OK  13.96s [gemini-3.5-flash-lite] wrong=-  issues=-
+[12/34] scanned_04.pdf                 OK  8.19s [gemini-3.5-flash-lite] wrong=-  issues=-
+[13/34] image_clean_01.png             OK  10.53s [gemini-3.5-flash-lite] wrong=-  issues=-
+[14/34] image_clean_02.png             OK  19.24s [gemini-3.5-flash-lite] wrong=-  issues=-
+[15/34] image_clean_03.png             OK  37.6s [gemini-3.1-flash-lite] wrong=-  issues=-
+[16/34] image_clean_04.png             OK  92.5s [nemotron-3-ultra-550b-a55b:free] wrong=-  issues=-
+[17/34] image_noisy_1_01.jpg           OK  11.51s [gemini-3.5-flash-lite] wrong=['tax']  issues=['total_mismatch', 'model_note']
+[18/34] image_noisy_1_02.jpg           OK  10.14s [gemini-3.5-flash-lite] wrong=-  issues=-
+[19/34] image_noisy_2_01.jpg           OK  5.91s [gemini-3.5-flash-lite] wrong=-  issues=-
+[20/34] image_noisy_2_02.jpg           OK  5.57s [gemini-3.5-flash-lite] wrong=-  issues=-
+[21/34] image_noisy_3_01.jpg           OK  10.37s [gemini-3.5-flash-lite] wrong=['invoice_number', 'invoice_date', 'supplier_name', 'customer_name', 'subtotal', 'tax', 'total', 'currency']  issues=['missing_field', 'missing_field', 'missing_field', 'low_confidence', 'model_note']
+[22/34] image_noisy_3_02.jpg           OK  9.19s [gemini-3.5-flash-lite] wrong=['invoice_number', 'invoice_date', 'supplier_name', 'customer_name', 'subtotal', 'tax', 'total', 'currency']  issues=['missing_field', 'missing_field', 'missing_field', 'missing_field', 'model_note']
+[23/34] image_noisy_3_03.jpg           OK  6.12s [gemini-3.5-flash-lite] wrong=['invoice_number', 'invoice_date', 'supplier_name', 'customer_name', 'subtotal', 'tax', 'total', 'currency']  issues=['missing_field', 'missing_field', 'missing_field', 'unknown_currency', 'ambiguous_number', 'low_confidence', 'low_confidence', 'model_note', 'model_note']
+[24/34] sheet_single_01.xlsx           OK  7.07s [gemini-3.5-flash-lite] wrong=-  issues=-
+[25/34] sheet_multi_02.xlsx            OK  3.99s [gemini-3.5-flash-lite] wrong=-  issues=-
+[26/34] table_01.csv                   OK  6.25s [gemini-3.5-flash-lite] wrong=-  issues=-
+[27/34] table_02.csv                   OK  3.23s [gemini-3.5-flash-lite] wrong=-  issues=-
+[28/34] usd_01.pdf                     OK  2.44s [gemini-3.5-flash-lite] wrong=-  issues=-
+[29/34] usd_02.pdf                     OK  2.66s [gemini-3.5-flash-lite] wrong=-  issues=-
+[30/34] notax_01.pdf                   OK  2.31s [gemini-3.5-flash-lite] wrong=-  issues=-
+[31/34] wrong_total_01.pdf             OK  2.68s [gemini-3.5-flash-lite] wrong=-  issues=['total_mismatch']
+[32/34] line_mismatch_01.pdf           OK  2.6s [gemini-3.5-flash-lite] wrong=-  issues=['line_item_mismatch', 'model_note']
+[33/34] corrupt_01.pdf                 OK  0.0s [-] wrong=-  issues=-
+[34/34] blank_01.png                   OK  2.73s [gemini-3.5-flash-lite] wrong=-  issues=['missing_field', 'missing_field', 'missing_field', 'missing_field', 'model_note']
+
+===== SUMMARY =====
+{
+  "files": 34,
+  "valid_documents": 32,
+  "extracted": 32,
+  "extraction_success_rate_%": 100.0,
+  "failure_rate_%": 0.0,
+  "crashes": 0,
+  "bad_files_handled_correctly": "2/2",
+  "all_outcomes_as_expected_%": 100.0,
+  "field_accuracy_%": 90.2,
+  "field_accuracy_note": "extraction ব্যর্থ হলে ওই ফাইলের সব ফিল্ড ভুল ধরা হয়েছে",
+  "per_field_%": {
+    "invoice_number": 90.6,
+    "invoice_date": 90.6,
+    "supplier_name": 90.6,
+    "customer_name": 90.6,
+    "subtotal": 90.6,
+    "tax": 87.5,
+    "total": 90.6,
+    "currency": 90.6
+  },
+  "fully_correct_documents": "27/32",
+  "line_item_accuracy_%": 89.0,
+  "line_items_matched": "81/91",
+  "extra_line_items_invented": 0,
+  "invented_values": {},
+  "accuracy_by_kind_%": {
+    "digital_pdf": 100.0,
+    "dup_file": 100.0,
+    "dup_invoice": 100.0,
+    "scanned_pdf": 100.0,
+    "image_clean": 100.0,
+    "image_noisy_1": 93.8,
+    "image_noisy_2": 100.0,
+    "image_noisy_3": 0.0,
+    "xlsx": 100.0,
+    "csv": 100.0,
+    "digital_usd": 100.0,
+    "digital_notax": 100.0,
+    "digital_wrong_total": 100.0,
+    "digital_line_mismatch": 100.0
+  },
+  "validator_detected": {
+    "dup_copy_of_digital_01.pdf": [
+      "duplicate_file"
+    ],
+    "dup_image_of_digital_01.png": [
+      "duplicate_invoice",
+      "duplicate_invoice"
+    ],
+    "wrong_total_01.pdf": [
+      "total_mismatch"
+    ],
+    "line_mismatch_01.pdf": [
+      "line_item_mismatch",
+      "model_note"
+    ]
+  },
+  "documents_with_wrong_values": 5,
+  "wrong_and_flagged_for_review": 5,
+  "silent_errors_wrong_but_not_flagged": {},
+  "silent_error_count": 0,
+  "false_alarms_on_correct_docs": "0/23 (0.0%)",
+  "false_alarm_files": {},
+  "seconds": {
+    "mean": 11.4,
+    "median": 7.63,
+    "p95": 28.59,
+    "max": 92.5,
+    "total": 387.5
+  },
+  "mean_llm_seconds": 10.3,
+  "mean_file_seconds": 1.4
+}
+
+সব বিস্তারিত: /home/au-aman/docuMind/evaluation/results/results.json

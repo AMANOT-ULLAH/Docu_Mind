@@ -137,7 +137,8 @@ def render_image(inv):
 
 
 def degrade(im, level):
-    angle, blur, noise, q, scale = {1: (0.8, 0.6, 8, 60, 0.8), 2: (2.0, 1.1, 18, 35, 0.65)}[level]
+    angle, blur, noise, q, scale = {1: (0.8, 0.6, 8, 60, 0.8), 2: (2.0, 1.1, 18, 35, 0.65),
+                                  3: (4.0, 1.8, 30, 22, 0.5)}[level]
     rng = np.random.default_rng(level)
     im = im.rotate(float(rng.uniform(-angle, angle)), resample=Image.BICUBIC, fillcolor="white")
     im = im.resize((int(W * scale), int(H * scale)), Image.LANCZOS).filter(ImageFilter.GaussianBlur(blur))
@@ -249,7 +250,8 @@ def main():
         entry(f"image_clean_{n:02d}.png", "image_clean", inv)
 
     # ৫. নষ্ট ছবি (মাঝারি আর খুব নষ্ট)
-    for level, rng_, kind in ((1, range(14, 16), "image_noisy_1"), (2, range(16, 18), "image_noisy_2")):
+    for level, rng_, kind in ((1, range(14, 16), "image_noisy_1"), (2, range(16, 18), "image_noisy_2"),
+                                (3, range(27, 30), "image_noisy_3")):
         for n, i in enumerate(rng_, 1):
             inv = build(i)
             im, q = degrade(render_image(inv), level)
