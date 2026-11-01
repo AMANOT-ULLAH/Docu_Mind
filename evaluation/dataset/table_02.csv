@@ -1,0 +1,15 @@
+Supplier,Padma Electronics Ltd
+Invoice No,INV-2026-3021
+Date,22 October 2026
+Bill To,Rahman Traders
+Currency,BDT
+
+Description,Qty,Unit Price,Amount
+Whiteboard,9,1800,16200
+USB-C cable,7,300,2100
+Standing desk,7,12000,84000
+Wireless keyboard,7,2100,14700
+
+Subtotal,,,117000
+VAT (10%),,,11700.0
+Total,,,128700.0

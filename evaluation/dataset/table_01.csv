@@ -1,0 +1,13 @@
+Supplier,Dhaka Office Supplies Ltd
+Invoice No,INV-2026-3020
+Date,21/10/2026
+Bill To,Sunrise Bakery
+Currency,BDT
+
+Description,Qty,Unit Price,Amount
+Office chair,7,6500,45500
+Laptop stand,3,1500,4500
+
+Subtotal,,,50000
+VAT (10%),,,5000.0
+Total,,,55000.0
