@@ -1,4 +1,5 @@
-from sqlalchemy import select
+from sqlalchemy import or_, select
+from sqlalchemy.orm import defer, selectinload
 
 from app.db.models import Document, Extraction, ProcessingEvent, ValidationIssue
 
@@ -87,10 +88,17 @@ def get_document(s, doc_id):
     return s.get(Document, doc_id)
 
 
-def list_documents(s, status=None, needs_review=None, limit=50, offset=0):
-    q = select(Document).order_by(Document.id.desc())
+def list_documents(s, status=None, needs_review=None, q=None, limit=50, offset=0):
+    stmt = (select(Document)
+            .options(selectinload(Document.extraction), defer(Document.extracted_text))
+            .order_by(Document.id.desc()))
     if status:
-        q = q.where(Document.status == status)
+        stmt = stmt.where(Document.status == status)
     if needs_review is not None:
-        q = q.where(Document.needs_review == needs_review)
-    return list(s.execute(q.limit(limit).offset(offset)).scalars())
+        stmt = stmt.where(Document.needs_review == needs_review)
+    if q:
+        like = f"%{q}%"
+        stmt = stmt.where(or_(Document.file_name.ilike(like),
+                              Document.invoice_key.ilike(like),
+                              Document.extracted_text.ilike(like)))
+    return list(s.execute(stmt.limit(limit).offset(offset)).scalars())
