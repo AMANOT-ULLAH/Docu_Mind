@@ -18,3 +18,6 @@ UPLOAD_DIR = os.getenv("UPLOAD_DIR") or str(Path(__file__).resolve().parent.pare
 MAX_UPLOAD_MB = float(os.getenv("MAX_UPLOAD_MB", "200"))
 MAX_WORKERS = int(os.getenv("MAX_WORKERS", "2"))   # একসাথে কটা ফাইল প্রসেস হবে (Gemini free quota বাঁচাতে)
 CORS_ORIGINS = _list("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173")
+
+EMBED_MODEL = os.getenv("EMBED_MODEL", "gemini-embedding-001")
+EMBED_DIM = int(os.getenv("EMBED_DIM", "768"))

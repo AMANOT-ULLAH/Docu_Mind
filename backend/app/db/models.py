@@ -7,6 +7,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
 
+from sqlalchemy.types import TypeDecorator, Text as _Text
+
 # PostgreSQL-এ JSONB (দ্রুত, query করা যায়), SQLite-এ সাধারণ JSON (test-এর জন্য)
 JSONType = JSON().with_variant(JSONB(), "postgresql")
 
@@ -38,6 +40,10 @@ class Document(Base):
     events: Mapped[list["ProcessingEvent"]] = relationship(
         back_populates="document", cascade="all, delete-orphan",
         order_by="ProcessingEvent.id")
+
+    chunks: Mapped[list["DocumentChunk"]] = relationship(
+        cascade="all, delete-orphan", passive_deletes=True)
+    
 
 
 class Extraction(Base):
@@ -84,3 +90,42 @@ class ProcessingEvent(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
     document: Mapped["Document"] = relationship(back_populates="events")
+
+
+class VectorType(TypeDecorator):
+    """PostgreSQL-এ আসল pgvector, SQLite-এ (test) JSON-text।"""
+    impl = _Text
+    cache_ok = True
+
+    def __init__(self, dim=768):
+        super().__init__()
+        self.dim = dim
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == "postgresql":
+            from pgvector.sqlalchemy import Vector
+            return dialect.type_descriptor(Vector(self.dim))
+        return dialect.type_descriptor(_Text())
+
+    def process_bind_param(self, value, dialect):
+        if value is None or dialect.name == "postgresql":
+            return value
+        import json
+        return json.dumps(list(value))
+
+    def process_result_value(self, value, dialect):
+        if value is None or dialect.name == "postgresql":
+            return value
+        import json
+        return json.loads(value)
+
+
+class DocumentChunk(Base):
+    __tablename__ = "document_chunks"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    document_id: Mapped[int] = mapped_column(
+        ForeignKey("documents.id", ondelete="CASCADE"), index=True)
+    chunk_index: Mapped[int] = mapped_column(Integer)
+    text: Mapped[str] = mapped_column(Text)
+    embedding: Mapped[Optional[list]] = mapped_column(VectorType(768))

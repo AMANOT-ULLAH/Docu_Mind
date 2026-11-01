@@ -19,6 +19,14 @@ def _run(doc_id):
             doc = crud.get_document(s, doc_id)
             if doc is not None:
                 ingest.process_existing(s, doc)
+                if doc.status == "done":
+                    try:
+                        from app.search import service
+                        service.index_document(s, doc)
+                    except Exception:
+                        # index ব্যর্থ হলে document-এর ফল নষ্ট হয় না; keyword search চলবে
+                        s.rollback()
+                        log.exception("indexing failed for document %s", doc_id)
     except Exception:
         log.exception("worker crashed on document %s", doc_id)
 

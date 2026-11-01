@@ -12,6 +12,8 @@ from app.api.deps import get_db
 from app.db import crud
 from app.services import corrections, worker
 from app.validation.duplicates import file_hash
+from app.search import service as search_service
+
 
 router = APIRouter()
 
@@ -203,3 +205,23 @@ def reprocess(doc_id: int, db: Session = Depends(get_db)):
     crud.set_status(db, d, "queued", "reprocess requested")
     worker.submit(d.id)
     return {"id": d.id, "status": d.status}
+
+@router.get("/search")
+def search(q: str = Query(..., min_length=1, max_length=300),
+           mode: str = Query("hybrid", pattern="^(semantic|keyword|hybrid)$"),
+           limit: int = Query(10, ge=1, le=50), db: Session = Depends(get_db)):
+    if mode == "keyword":
+        ids = search_service.keyword_ids(db, q, limit)
+        hits = [(i, None, None) for i in ids]
+    else:
+        try:
+            hits = (search_service.semantic_search(db, q, limit) if mode == "semantic"
+                    else search_service.hybrid_search(db, q, limit))
+        except Exception as e:
+            raise HTTPException(503, f"semantic search unavailable: {type(e).__name__}")
+    items = []
+    for doc_id, score, snippet in hits:
+        d = crud.get_document(db, doc_id)
+        if d is not None:
+            items.append({**_summary(d), "score": score, "snippet": snippet})
+    return {"query": q, "mode": mode, "items": items}
