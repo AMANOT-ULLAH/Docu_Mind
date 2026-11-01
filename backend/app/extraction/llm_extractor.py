@@ -1,13 +1,14 @@
 import json
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 
 import requests
 from google import genai
 from google.genai import types
 
-from app.config import (GEMINI_API_KEY, GEMINI_MODELS, LLM_TIMEOUT_SECONDS,
-                        OPENROUTER_API_KEY, OPENROUTER_MODELS)
+from app.config import (ALLOW_OPENROUTER, GEMINI_API_KEY, GEMINI_MODELS,
+                        LLM_TIMEOUT_SECONDS, OPENROUTER_API_KEY, OPENROUTER_MODELS)
 from .prompts import SYSTEM_PROMPT
 from .schemas import InvoiceExtraction
 
@@ -71,7 +72,7 @@ def _chain():
     chain = []
     if GEMINI_API_KEY:
         chain += [("gemini", m) for m in GEMINI_MODELS]
-    if OPENROUTER_API_KEY:
+    if OPENROUTER_API_KEY and ALLOW_OPENROUTER:   # তৃতীয় পক্ষে নথি পাঠানো: ডিফল্টে বন্ধ
         chain += [("openrouter", m) for m in OPENROUTER_MODELS]
     return chain
 
@@ -85,6 +86,21 @@ def _cooldown_for(err: Exception) -> int:
     return 30           # অন্য সাময়িক সমস্যা
 
 
+HARD_DEADLINE_MARGIN = 5.0   # SDK-র নিজস্ব timeout-এর পরেও এতক্ষণ অপেক্ষা, তারপর call ছেড়ে দিই
+
+
+def _with_deadline(fn, *args):
+    """call আলাদা thread-এ চালায়; সময়সীমা পেরোলে ছেড়ে দিয়ে পরের model-এ যায়।"""
+    pool = ThreadPoolExecutor(max_workers=1)
+    fut = pool.submit(fn, *args)
+    try:
+        return fut.result(timeout=LLM_TIMEOUT_SECONDS + HARD_DEADLINE_MARGIN)
+    except FutureTimeout:
+        raise TimeoutError(f"no answer within {LLM_TIMEOUT_SECONDS + HARD_DEADLINE_MARGIN:g}s")
+    finally:
+        pool.shutdown(wait=False)
+
+
 def extract_invoice(text: str):
     """একটার পর একটা model চেষ্টা করে। (result, meta) ফেরত দেয়।
     প্রতি model-এ একবারই চেষ্টা, কারণ OpenRouter-এর দৈনিক ৫০টা খরচ হয়ে যায়।"""
@@ -95,7 +111,7 @@ def extract_invoice(text: str):
             continue
         try:
             call = _call_gemini if provider == "gemini" else _call_openrouter
-            raw, actual_model = call(model, text)
+            raw, actual_model = _with_deadline(call, model, text)
             result = _parse(raw)
             return result, {"provider": provider, "model": actual_model,
                             "attempts": attempts}

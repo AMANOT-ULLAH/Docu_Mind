@@ -22,3 +22,4 @@ CORS_ORIGINS = _list("CORS_ORIGINS", "http://localhost:3000,http://localhost:517
 EMBED_MODEL = os.getenv("EMBED_MODEL", "gemini-embedding-001")
 EMBED_DIM = int(os.getenv("EMBED_DIM", "768"))
 LLM_TIMEOUT_SECONDS = float(os.getenv("LLM_TIMEOUT_SECONDS", "45"))
+ALLOW_OPENROUTER = os.getenv("ALLOW_OPENROUTER", "false").lower() == "true"

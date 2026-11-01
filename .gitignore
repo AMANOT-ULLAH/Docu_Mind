@@ -4,3 +4,4 @@ __pycache__/
 .env
 uploads/
 node_modules/backend/uploads/
+evaluation/dataset_big/

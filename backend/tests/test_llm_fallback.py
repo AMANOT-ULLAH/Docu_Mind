@@ -49,3 +49,21 @@ def test_all_fail_raises(monkeypatch):
     monkeypatch.setattr(L, "_call_gemini", fake)
     with pytest.raises(L.AllProvidersFailed):
         L.extract_invoice("x")
+
+
+def test_hard_deadline_abandons_hung_call(monkeypatch):
+    import time
+    monkeypatch.setattr(L, "LLM_TIMEOUT_SECONDS", 0.2)
+    monkeypatch.setattr(L, "HARD_DEADLINE_MARGIN", 0.0)
+
+    def fake(model, text):
+        if model == "m1":
+            time.sleep(1.5)
+        return "R", model
+
+    monkeypatch.setattr(L, "_call_gemini", fake)
+    t0 = time.time()
+    result, meta = L.extract_invoice("x")
+    assert meta["model"] == "m2"
+    assert time.time() - t0 < 1.0
+    assert "TimeoutError" in meta["attempts"][0]
