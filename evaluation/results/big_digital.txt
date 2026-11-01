@@ -1,0 +1,7 @@
+generated digital_1000.pdf in 59.2 s
+file:            digital_1000.pdf (6.7 MB)
+status:          success, pages read: 1000
+processing:      2.9 s  (0.003 s/page)
+peak memory:     184 MB
+extracted text:  1,187,000 chars  (~296,750 tokens, rough chars/4 estimate)
+errors/warnings: [] []

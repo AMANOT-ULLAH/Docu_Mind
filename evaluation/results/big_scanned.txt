@@ -1,0 +1,7 @@
+generated scanned_30.pdf in 1.6 s
+file:            scanned_30.pdf (4.6 MB)
+status:          success, pages read: 30
+processing:      120.5 s  (4.018 s/page)
+peak memory:     419 MB
+extracted text:  33,540 chars  (~8,385 tokens, rough chars/4 estimate)
+errors/warnings: [] []

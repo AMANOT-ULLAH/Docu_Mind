@@ -3,5 +3,5 @@ __pycache__/
 *.pyc
 .env
 uploads/
-node_modules/backend/uploads/
+node_modules/
 evaluation/dataset_big/
