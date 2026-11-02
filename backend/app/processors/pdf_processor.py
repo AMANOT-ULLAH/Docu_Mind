@@ -44,6 +44,12 @@ def extract_pdf_pages(path, ocr_lang="eng+ben", dpi=200, workers=None, progress=
             except Exception:
                 pass  # progress-এর ভুলে প্রসেসিং নষ্ট হবে না
 
+    if progress:
+        try:
+            progress(0, total)   # শুরুতেই মোট পেজ জানাই
+        except Exception:
+            pass
+
     pool = ThreadPoolExecutor(max_workers=workers) if workers > 1 else None
     slots = BoundedSemaphore(workers * 2) if pool else None
     futures = []

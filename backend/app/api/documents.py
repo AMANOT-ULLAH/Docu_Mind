@@ -84,6 +84,13 @@ def _effective(d):
     return None if e is None else (e.corrected or e.result)
 
 
+def _stage(d):
+    """UI-র জন্য ধাপ: reading = পেজ পড়া চলছে, extracting = পেজ শেষ, AI কাজ করছে।"""
+    if d.status != "processing" or not d.pages_total:
+        return d.status
+    return "extracting" if (d.pages_done or 0) >= d.pages_total else "reading"
+
+
 def _summary(d):
     ex = _effective(d) or {}
 
@@ -92,6 +99,7 @@ def _summary(d):
 
     return {"id": d.id, "file_name": d.file_name, "status": d.status,
             "needs_review": d.needs_review, "created_at": d.created_at.isoformat(),
+            "stage": _stage(d), "pages_done": d.pages_done, "pages_total": d.pages_total,
             "invoice_number": v("invoice_number"), "supplier_name": v("supplier_name"),
             "total": v("total"), "currency": v("currency"), "error": d.error}
 

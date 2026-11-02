@@ -88,9 +88,10 @@ def test_progress_reaches_total(tmp_path, fake_ocr):
             seen.append((done, total))
 
     P.extract_pdf_pages(p, workers=3, progress=progress)
-    assert len(seen) == 6
+    assert len(seen) == 7
+    assert seen[0] == (0, 6)          # শুরুতেই মোট পেজ জানানো হয়
     assert all(t == 6 for _, t in seen)
-    assert sorted(d for d, _ in seen) == [1, 2, 3, 4, 5, 6]
+    assert sorted(d for d, _ in seen) == [0, 1, 2, 3, 4, 5, 6]
 
 
 def test_broken_progress_callback_is_ignored(tmp_path, fake_ocr):

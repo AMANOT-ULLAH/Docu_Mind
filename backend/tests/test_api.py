@@ -220,3 +220,21 @@ def test_reprocess_missing_file_is_410(env):
     d = crud.create_document(env.db, "f.pdf", str(env.tmp / "gone.pdf"), "h")
     crud.mark_failed(env.db, d, "boom")
     assert env.client.post(f"/documents/{d.id}/reprocess").status_code == 410
+
+
+def test_detail_shows_page_progress_and_stage(env):
+    doc_id = upload(env, ("a.pdf", PDF, "application/pdf")).json()["documents"][0]["id"]
+    d = crud.get_document(env.db, doc_id)
+    crud.set_status(env.db, d, "processing")
+    crud.set_progress(env.db, d, 40, 100)
+    r = env.client.get(f"/documents/{doc_id}").json()
+    assert (r["pages_done"], r["pages_total"], r["stage"]) == (40, 100, "reading")
+    listed = env.client.get("/documents").json()["items"][0]
+    assert (listed["pages_done"], listed["pages_total"]) == (40, 100)
+    crud.set_progress(env.db, d, 100, 100)
+    assert env.client.get(f"/documents/{doc_id}").json()["stage"] == "extracting"
+
+
+def test_stage_is_plain_status_without_page_info(env):
+    doc_id = upload(env, ("a.pdf", PDF, "application/pdf")).json()["documents"][0]["id"]
+    assert env.client.get(f"/documents/{doc_id}").json()["stage"] == "queued"
