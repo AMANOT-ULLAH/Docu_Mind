@@ -20,6 +20,8 @@ def create_document(s, file_name, stored_path, fhash):
 
 def set_status(s, doc, status, message=None):
     doc.status = status
+    if status in ("queued", "processing"):
+        doc.pages_done = 0
     doc.events.append(ProcessingEvent(event=status, message=message))
     s.commit()
 

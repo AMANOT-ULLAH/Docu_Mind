@@ -121,7 +121,7 @@ def test_ingest_passes_previous_documents_as_known(s, tmp_path, monkeypatch):
     f2.write_bytes(b"two")
     seen = []
 
-    def fake_pipeline(path, known=None):
+    def fake_pipeline(path, known=None, progress=None):
         seen.append(known)
         return fake_out()
 
@@ -136,7 +136,7 @@ def test_ingest_crash_marks_failed_instead_of_raising(s, tmp_path, monkeypatch):
     f = tmp_path / "a.pdf"
     f.write_bytes(b"one")
 
-    def boom(path, known=None):
+    def boom(path, known=None, progress=None):
         raise RuntimeError("kaboom")
 
     monkeypatch.setattr(ingest, "process_and_extract", boom)

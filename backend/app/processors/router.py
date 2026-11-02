@@ -9,7 +9,7 @@ from .excel_processor import extract_excel
 from .csv_processor import extract_csv
 
 
-def process_document(path) -> ExtractionResult:
+def process_document(path, progress=None) -> ExtractionResult:
     """যেকোনো ফাইল নেয়, কখনো crash করে না, সবসময় ExtractionResult ফেরত দেয়।"""
     path = Path(path)
     start = time.perf_counter()
@@ -29,7 +29,7 @@ def process_document(path) -> ExtractionResult:
         result.file_hash = sha256_of(path)
 
         if result.file_type == "pdf":
-            pages, warnings = extract_pdf_pages(path)
+            pages, warnings = extract_pdf_pages(path, progress=progress)
             tables = []
         elif result.file_type == "image":
             pages, warnings = extract_image_pages(path)

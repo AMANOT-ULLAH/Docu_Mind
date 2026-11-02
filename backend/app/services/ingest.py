@@ -2,6 +2,7 @@ from pathlib import Path
 
 from app.db import crud
 from app.services.pipeline import process_and_extract
+from app.services.progress import ProgressWriter
 from app.validation.duplicates import file_hash
 
 
@@ -10,7 +11,8 @@ def process_existing(s, doc):
     crud.set_status(s, doc, "processing")
     try:
         known = crud.known_records(s, exclude_id=doc.id)
-        out = process_and_extract(doc.stored_path, known=known)
+        out = process_and_extract(doc.stored_path, known=known,
+                                  progress=ProgressWriter(doc.id))
         crud.save_result(s, doc, out)
     except Exception as e:
         s.rollback()

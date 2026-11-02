@@ -16,9 +16,9 @@ def build_text(doc) -> str:
     )
 
 
-def process_and_extract(path, known=None) -> dict:
+def process_and_extract(path, known=None, progress=None) -> dict:
     start = time.perf_counter()
-    doc = process_document(path)
+    doc = process_document(path, progress=progress)
 
     out = {
         "file": doc.file_name,
