@@ -43,3 +43,5 @@ def init_db():
     """সব table বানায় (আগে থাকলে ছোঁয় না)।"""
     from app.db import models  # noqa: F401  (table-গুলো register করার জন্য)
     Base.metadata.create_all(get_engine())
+    from app.db.migrate import ensure_columns
+    ensure_columns(get_engine())

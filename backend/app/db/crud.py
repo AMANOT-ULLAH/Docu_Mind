@@ -102,3 +102,9 @@ def list_documents(s, status=None, needs_review=None, q=None, limit=50, offset=0
                               Document.invoice_key.ilike(like),
                               Document.extracted_text.ilike(like)))
     return list(s.execute(stmt.limit(limit).offset(offset)).scalars())
+
+
+def set_progress(s, doc, done, total):
+    doc.pages_done = done
+    doc.pages_total = total
+    s.commit()

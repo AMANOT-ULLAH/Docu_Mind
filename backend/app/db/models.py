@@ -30,6 +30,8 @@ class Document(Base):
     review_reasons: Mapped[Optional[list]] = mapped_column(JSONType)
     extracted_text: Mapped[Optional[str]] = mapped_column(Text)
     error: Mapped[Optional[str]] = mapped_column(Text)
+    pages_done: Mapped[Optional[int]] = mapped_column(Integer, default=0)
+    pages_total: Mapped[Optional[int]] = mapped_column(Integer)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, onupdate=_now)
 
