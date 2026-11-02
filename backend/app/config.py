@@ -23,3 +23,9 @@ EMBED_MODEL = os.getenv("EMBED_MODEL", "gemini-embedding-001")
 EMBED_DIM = int(os.getenv("EMBED_DIM", "768"))
 LLM_TIMEOUT_SECONDS = float(os.getenv("LLM_TIMEOUT_SECONDS", "45"))
 ALLOW_OPENROUTER = os.getenv("ALLOW_OPENROUTER", "false").lower() == "true"
+
+OCR_WORKERS = int(os.getenv("OCR_WORKERS", str(max(1, (os.cpu_count() or 2) // 2))))
+
+# tesseract-এর ভেতরের OpenMP thread সীমিত করি: একাধিক OCR প্রক্রিয়া একসাথে চললে
+# thread-এর লড়াইয়ে ১৮ গুণ পর্যন্ত ধীর হয়েছিল (মাপা, evaluation/results দেখো)
+os.environ.setdefault("OMP_THREAD_LIMIT", "1")

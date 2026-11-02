@@ -1,0 +1,12 @@
+== workers=1
+processing:      54.0 s  (3.375 s/page)
+peak memory:     296 MB
+== workers=2
+processing:      30.8 s  (1.926 s/page)
+peak memory:     449 MB
+== workers=4
+processing:      22.6 s  (1.413 s/page)
+peak memory:     523 MB
+== workers=8
+processing:      39.4 s  (2.462 s/page)
+peak memory:     704 MB
