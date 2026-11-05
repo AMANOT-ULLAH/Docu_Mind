@@ -81,7 +81,7 @@ export default function DocumentDetail({ id, onBack }) {
           <StatusBadge status={info.status} />
           <ReviewBadge needs={info.needs_review} />
         </div>
-        <Progress status={info.status} />
+                <Progress status={info.status} stage={info.stage} done={info.pages_done} total={info.pages_total} />
         {info.error && <p className="text-sm text-red-600">{info.error}</p>}
         <div className="flex gap-2">
           {info.status === 'failed' && (

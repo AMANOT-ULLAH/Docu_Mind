@@ -56,7 +56,7 @@ export default function DocumentList({ refreshKey, onOpen }) {
                 <StatusBadge status={d.status} />
                 <ReviewBadge needs={d.needs_review} />
               </div>
-              <Progress status={d.status} />
+                            <Progress status={d.status} stage={d.stage} done={d.pages_done} total={d.pages_total} />
               <div className="text-xs text-slate-500 flex gap-4 flex-wrap">
                 {d.invoice_number && <span>Invoice: {d.invoice_number}</span>}
                 {d.supplier_name && <span>Supplier: {d.supplier_name}</span>}

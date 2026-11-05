@@ -21,12 +21,36 @@ export function ReviewBadge({ needs }) {
   ) : null
 }
 
-export function Progress({ status }) {
-  const pct = { queued: 5, processing: 55, done: 100, failed: 100 }[status] ?? 0
-  const color = status === 'failed' ? 'bg-red-500' : status === 'done' ? 'bg-green-500' : 'bg-blue-500'
+export function Progress({ status, stage, done, total }) {
+  let pct = 0
+  let label = ''
+  let color = 'bg-blue-500'
+  let pulse = false
+
+  if (status === 'queued') {
+    pct = 3; label = 'Waiting in queue…'; color = 'bg-slate-400'
+  } else if (status === 'processing') {
+    if (stage === 'extracting') {
+      pct = 92; label = `All ${total} pages read. AI is extracting data…`; pulse = true
+    } else if (total) {
+      pct = Math.round((90 * (done || 0)) / total)
+      label = `Reading pages ${done || 0} / ${total}`
+    } else {
+      pct = 15; label = 'Processing…'; pulse = true
+    }
+  } else if (status === 'done') {
+    pct = 100; color = 'bg-green-500'
+  } else if (status === 'failed') {
+    pct = 100; color = 'bg-red-500'
+  }
+
   return (
-    <div className="w-full h-1.5 bg-slate-200 rounded overflow-hidden">
-      <div className={`h-full ${color} transition-all`} style={{ width: pct + '%' }} />
+    <div className="w-full">
+      <div className="w-full h-2 bg-slate-200 rounded overflow-hidden">
+        <div className={`h-full ${color} transition-all duration-500 ${pulse ? 'animate-pulse' : ''}`}
+             style={{ width: pct + '%' }} />
+      </div>
+      {label && <p className="mt-1 text-xs text-slate-500">{label}</p>}
     </div>
   )
 }
