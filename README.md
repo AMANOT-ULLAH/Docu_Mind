@@ -11,7 +11,7 @@ DocuMind reads invoices from PDFs, scanned images, Excel and CSV files, extracts
 - **Background processing:** uploads return immediately (`202`); a worker pool processes documents and reports page progress
 - **Search:** keyword, semantic (pgvector) and hybrid search over document text
 - **History:** every document keeps a timeline of processing events
-- **Frontend:** upload, list, detail, correction and progress views
+- **Frontend (React + Vite):** drag-and-drop upload (PDF, JPG, PNG, TIFF, XLSX, XLS, CSV), a document list with status and review filters and live progress bars, a detail and correction view, and a search page
 
 ## Architecture
 
@@ -51,8 +51,15 @@ backend/app/
   services/     pipeline, background worker, ingest, corrections, progress
   db/           SQLAlchemy models, CRUD, migrations
 backend/tests/  119 tests
-evaluation/     labelled dataset, run_eval.py, results, REPORT.md
-frontend/       web UI
+backend/*.py, *.sh   developer helper scripts (try_*, make_*, watch_*): manual checks and
+                     test-data generators, not needed to run the app
+evaluation/
+  dataset/      34 labelled files + labels.json
+  dataset_big/  large-file tests (up to a 1000-page digital PDF and a 200-page scanned PDF)
+  sample_data/  hand-made samples, including corrupted files
+  results/      saved runs (Gemini 3.1, Gemini 3.5, large-file runs)
+  run_eval.py, REPORT.md
+frontend/       React + Vite web UI (src/App.jsx, src/components, src/api.js)
 docker-compose.yml   PostgreSQL + pgvector
 ```
 
@@ -144,6 +151,16 @@ Interactive docs are available at `http://127.0.0.1:8000/docs` while the backend
 
 ## Setup
 
+Three things must be running. Docker is used **only for the PostgreSQL database**; the backend and frontend run directly on your machine.
+
+| # | What | How | Address |
+|---|---|---|---|
+| 1 | Database (Docker) | `docker compose --env-file backend/.env up -d` | `127.0.0.1:5432` |
+| 2 | Backend (FastAPI) | `bash backend/start.sh` | `http://127.0.0.1:8000` |
+| 3 | Frontend (Vite) | `cd frontend && npm run dev` | `http://localhost:5173` |
+
+The very first time, do the one-time setup below (prerequisites, `.env`, install packages). After that, `backend/start.sh` also starts the existing database container, so you only need two terminals: backend and frontend.
+
 ### Prerequisites
 
 - Python 3.10+ and Node.js
@@ -153,7 +170,7 @@ Interactive docs are available at `http://127.0.0.1:8000/docs` while the backend
 
 ### 1. Configure `backend/.env`
 
-Do not commit this file.
+Copy `backend/.env.example` to `backend/.env` and fill it in. Do not commit `.env`.
 
 ```
 GEMINI_API_KEY=...
@@ -225,6 +242,8 @@ python run_eval.py --sleep 4
 ```
 
 Results are written to `evaluation/results/results.json`. See `evaluation/REPORT.md` for the full report.
+
+The labelled dataset (`evaluation/dataset/`) covers digital PDFs, scanned PDFs, clean and noisy images (three noise levels), Excel and CSV files, USD and no-tax invoices, planted errors (wrong total, line-item mismatch), duplicates, a blank image and a corrupt PDF. Large-file runs (`evaluation/dataset_big/`: 10 to 200 scanned pages and a 1000-page digital PDF) have their output in `evaluation/results/big_*.txt`.
 
 ## Evaluation summary
 
